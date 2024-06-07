@@ -36,3 +36,12 @@ class ListEmpleadosByWork(ListView):
         )
         print('lista resultado: ', lista)
         return lista
+
+class ListHabilidadesEmpleado(ListView):
+    template_name = 'persona/habilidades.html'
+    context_object_name = 'habilidades'
+
+    def get_queryset(self):
+        empleado = Empleado.objects.get(id=1)
+        print(empleado.habilidades.all())
+        return empleado.habilidades.all()
