@@ -1,7 +1,10 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.views.generic import  ListView
+from django.views.generic import  (
+    ListView, 
+    DetailView
+)
 
 from .models import Empleado
 # Create your views here.
@@ -45,3 +48,8 @@ class ListHabilidadesEmpleado(ListView):
         empleado = Empleado.objects.get(id=1)
         print(empleado.habilidades.all())
         return empleado.habilidades.all()
+    
+
+class EmpleadoDetailView(DetailView):
+    model = Empleado
+    template_name = "persona/detail_empleado.html"
