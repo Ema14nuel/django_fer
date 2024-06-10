@@ -3,17 +3,33 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import  (
     ListView, 
-    DetailView
+    DetailView,
+    CreateView,
+    TemplateView
 )
 
 from .models import Empleado
 # Create your views here.
 
+
+class InicioView(TemplateView):
+    template_name = "inicio.html"
+
+
+
+
 class ListaAllEmpleados(ListView):
     template_name = 'persona/list_all.html'
-    paginate_by = 5
-    ordering = 'first_name'
-    model = Empleado
+    paginate_by = 3
+    ordering = 'id'
+    context_object_name = 'empleados'
+
+    def get_queryset(self):
+        palabra_clave = self.request.GET.get("kword", '')
+        lista = Empleado.objects.filter(
+            first_name__icontains = palabra_clave
+        )
+        return lista
 
 class ListByAreaEmpleado(ListView):
     template_name = 'persona/list_by_area.html'
@@ -53,3 +69,10 @@ class ListHabilidadesEmpleado(ListView):
 class EmpleadoDetailView(DetailView):
     model = Empleado
     template_name = "persona/detail_empleado.html"
+
+
+class EmpleadoCreateView(CreateView):
+    template_name = 'persona/add.html'
+    model = Empleado
+    fields = ('__all__')
+    success_url = '.'
