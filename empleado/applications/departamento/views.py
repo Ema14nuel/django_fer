@@ -14,7 +14,7 @@ from .models import Departamento
 
 
 class DepartamentoListView(ListView):
-    template_name = "departamento/list.html"
+    template_name = "departamento/lista.html"
     model = Departamento
     context_object_name = 'departamentos'
 

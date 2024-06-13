@@ -33,6 +33,7 @@ class ListaAllEmpleados(ListView):
 
 class ListByAreaEmpleado(ListView):
     template_name = 'persona/list_by_area.html'
+    context_object_name = 'empleados'
     
     def get_queryset(self):
         # se recibe variable de la url
