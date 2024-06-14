@@ -31,6 +31,15 @@ class ListaAllEmpleados(ListView):
         )
         return lista
 
+
+class ListaEmpleadosAdmin(ListView):
+    template_name = 'persona/lista_empleados.html'
+    paginate_by = 10
+    ordering = 'id'
+    context_object_name = 'empleados'
+    model = Empleado
+
+
 class ListByAreaEmpleado(ListView):
     template_name = 'persona/list_by_area.html'
     context_object_name = 'empleados'
